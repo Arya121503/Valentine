@@ -9,6 +9,7 @@ body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   overflow-x: hidden;
+  user-select: none;
 }
 
 .container {
@@ -76,20 +77,23 @@ body {
   margin-bottom: 30px;
 }
 
+/* All Buttons Base Style */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .next-button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: none;
   padding: 15px 40px;
   font-size: 1.2rem;
   border-radius: 50px;
-  cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-  pointer-events: auto;
-  position: relative;
-  z-index: 100;
 }
 
 .next-button:hover {
@@ -189,61 +193,59 @@ body {
   align-items: center;
   flex-wrap: wrap;
   margin: 30px 0;
-  min-height: 100px;
+  min-height: 120px;
   position: relative;
 }
 
 .yes-button {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   color: white;
-  border: none;
   padding: 20px 40px;
   font-size: 1.3rem;
   border-radius: 50px;
-  cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 700;
   box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
   animation: wiggle 1s infinite;
-  pointer-events: auto;
-  position: relative;
-  z-index: 100;
 }
 
 @keyframes wiggle {
   0%, 100% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(1);
   }
   25% {
-    transform: rotate(5deg);
+    transform: rotate(5deg) scale(1);
   }
   75% {
-    transform: rotate(-5deg);
+    transform: rotate(-5deg) scale(1);
   }
 }
 
 .yes-button:hover {
-  transform: scale(1.1) translateY(-5px);
+  animation: none;
   box-shadow: 0 10px 30px rgba(245, 87, 108, 0.6);
+}
+
+.yes-button:active {
+  transform: scale(0.95);
 }
 
 .no-button {
   background: #ccc;
   color: #666;
-  border: none;
   padding: 12px 24px;
   font-size: 1rem;
   border-radius: 50px;
-  cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
-  pointer-events: auto;
-  position: relative;
-  z-index: 100;
 }
 
 .no-button:hover {
   background: #bbb;
+}
+
+.no-button:active {
+  transform: scale(0.95);
 }
 
 .hint {
@@ -340,7 +342,9 @@ body {
   height: 4px;
   background: #fff;
   border-radius: 50%;
-  animation: firework 2s infinite;
+  animation: explode 2s infinite;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .firework:nth-child(1) {
@@ -361,19 +365,28 @@ body {
   animation-delay: 1.4s;
 }
 
-@keyframes firework {
+@keyframes explode {
   0% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(0);
     opacity: 1;
-    box-shadow: 0 0 0 0 #fff, 0 0 0 0 #ff0, 0 0 0 0 #f0f;
+    box-shadow: 0 0 0 0 #fff, 0 0 0 0 #ff0, 0 0 0 0 #f0f, 0 0 0 0 #0ff;
   }
   50% {
     opacity: 1;
+    transform: scale(1);
   }
   100% {
-    transform: translate(var(--x, 0), var(--y, 0));
+    transform: scale(1);
     opacity: 0;
-    box-shadow: 0 0 50px 20px #fff, 0 0 50px 20px #ff0, 0 0 50px 20px #f0f;
+    box-shadow: 
+      0 -50px 0 10px #fff, 
+      50px 0 0 10px #ff0, 
+      0 50px 0 10px #f0f, 
+      -50px 0 0 10px #0ff,
+      35px 35px 0 8px #fff,
+      -35px -35px 0 8px #ff0,
+      35px -35px 0 8px #f0f,
+      -35px 35px 0 8px #0ff;
   }
 }
 
@@ -402,5 +415,9 @@ body {
   
   .celebration-title {
     font-size: 2.2rem;
+  }
+
+  .buttons-container {
+    min-height: 100px;
   }
 }
