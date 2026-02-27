@@ -33,7 +33,7 @@ export default function Home() {
     },
     {
       title: "Karena Itu...",
-      text: "Di hari Valentine ini, aku ingin bertanya dengan tulus dari hatiku yang paling dalam...",
+      text: "Selamat Hari Valentine, meskipun telat mengucapkannya. aku ingin bertanya dengan tulus dari hatiku yang paling dalam..,",
       emoji: "💝"
     }
   ];
@@ -48,7 +48,7 @@ export default function Home() {
   };
 
   const handleYes = () => {
-    setStep(messages.length);
+    setStep(messages.length + 1);
   };
 
   if (step < messages.length) {
